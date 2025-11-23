@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Page Viewer</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: sans-serif;
+  }
+
+  #viewer {
+    width: 85vw;
+    height: 85vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #viewer img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .navBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 10;
+    user-select: none;
+  }
+
+  #prev { left: 10px; }
+  #next { right: 10px; }
+
+</style>
+</head>
+<body>
+
+<div id="viewer">
+  <button id="prev" class="navBtn">&#8249;</button>
+  <img id="pageImage" src="RATARationale.jpg">
+  <button id="next" class="navBtn">&#8250;</button>
+</div>
+
+<script>
+  const pages = [
+   "page.jpg",
+   "page2.jpg",
+   "page3.jpg",
+   "page4.jpg",
+   "page5.jpg",
+   "page6.jpg",
+   "page7.jpg",
+   "page8.jpg",
+   "page9.jpg",
+   "page10.jpg",
+   "page11.jpg",
+   "page12.jpg",
+   "page13.jpg",
+   "page14.jpg",
+   "page15.jpg",
+   "page16.jpg",
+   "page17.jpg",
+   "page18.jpg",
+   "page19.jpg",
+   "page20.jpg",
+   "page21.jpg",
+    "page22.jpg",
+    "page23.jpg"
+    // add the rest later
+  ];
+
+  let current = 0;
+
+  const img = document.getElementById("pageImage");
+  const prevBtn = document.getElementById("prev");
+  const nextBtn = document.getElementById("next");
+
+  function updatePage() {
+    img.src = pages[current];
+  }
+
+  prevBtn.onclick = () => {
+    if (current > 0) {
+      current--;
+      updatePage();
+    }
+  };
+
+  nextBtn.onclick = () => {
+    if (current < pages.length - 1) {
+      current++;
+      updatePage();
+    }
+  };
+</script>
+
+</body>
+</html>
