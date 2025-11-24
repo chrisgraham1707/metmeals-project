@@ -32,6 +32,7 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    display: none; /* hidden until loaded */
   }
 
   .navBtn {
@@ -50,66 +51,71 @@
 
   #prev { left: 10px; }
   #next { right: 10px; }
-
 </style>
 </head>
 <body>
 
 <div id="viewer">
   <button id="prev" class="navBtn">&#8249;</button>
-  <img id="pageImage" src="RATARationale.jpg">
+  <img id="pageImage" src="">
   <button id="next" class="navBtn">&#8250;</button>
 </div>
 
 <script>
   const pages = [
-   "page.jpg",
-   "page2.jpg",
-   "page3.jpg",
-   "page4.jpg",
-   "page5.jpg",
-   "page6.jpg",
-   "page7.jpg",
-   "page8.jpg",
-   "page9.jpg",
-   "page10.jpg",
-   "page11.jpg",
-   "page12.jpg",
-   "page13.jpg",
-   "page14.jpg",
-   "page15.jpg",
-   "page16.jpg",
-   "page17.jpg",
-   "page18.jpg",
-   "page19.jpg",
-   "page20.jpg",
-   "page21.jpg",
+    "page.jpg",
+    "page2.jpg",
+    "page3.jpg",
+    "page4.jpg",
+    "page5.jpg",
+    "page6.jpg",
+    "page7.jpg",
+    "page8.jpg",
+    "page9.jpg",
+    "page10.jpg",
+    "page11.jpg",
+    "page12.jpg",
+    "page13.jpg",
+    "page14.jpg",
+    "page15.jpg",
+    "page16.jpg",
+    "page17.jpg",
+    "page18.jpg",
+    "page19.jpg",
+    "page20.jpg",
+    "page21.jpg",
     "page22.jpg",
     "page23.jpg"
-    // add the rest later
   ];
 
   let current = 0;
-
   const img = document.getElementById("pageImage");
-  const prevBtn = document.getElementById("prev");
-  const nextBtn = document.getElementById("next");
 
-  function updatePage() {
-    img.src = pages[current];
+  // Wait for the first image to load before showing it
+  function loadPage(pageIndex) {
+    img.style.display = "none"; // hide while loading
+    img.src = pages[pageIndex];
+
+    img.onload = () => {
+      img.style.display = "block"; // show once loaded
+    };
   }
 
-  prevBtn.onclick = () => {
+  // Initial load
+  loadPage(current);
+
+  // Buttons
+  document.getElementById("prev").onclick = () => {
     if (current > 0) {
       current--;
-      updatePage();
+      loadPage(current);
     }
   };
 
-  nextBtn.onclick = () => {
+  document.getElementById("next").onclick = () => {
     if (current < pages.length - 1) {
       current++;
-      updatePage();
+      loadPage(current);
     }
   };
 </script>
